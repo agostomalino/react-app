@@ -3,10 +3,11 @@ import React from 'react';
 
 const Item = ({itemInfo}) => {
   console.log(itemInfo)
-  // return <div>soy un item, mi nombre es {itemInfo.nombre}, precio es {itemInfo.precio} y mi stock {itemInfo.stock}</div>;
+ 
   return<> 
   <div>
   <div>
+    <img src={itemInfo.img}/>
     <h5>{itemInfo.title}</h5>
     <p>{itemInfo.description}</p>
     <p>{itemInfo.precio}</p>
