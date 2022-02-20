@@ -1,18 +1,19 @@
 import React from 'react';
-
+import { Link } from 'react-router-dom';
 
 const Item = ({itemInfo}) => {
   console.log(itemInfo)
  
   return<> 
+  <div className='card'>
   <div>
-  <div>
-    <img src={itemInfo.img}/>
+    <img src={itemInfo.img} width="200px"/>
     <h5>{itemInfo.title}</h5>
     <p>{itemInfo.description}</p>
     <p>{itemInfo.precio}</p>
-    <a href="#">Ver detalle del Producto</a>
     <p>Stock: {itemInfo.stock} </p>
+   <Link to={`/item/${itemInfo.id}`} className='btn btn-primary'>Ver detalle del producto</Link>
+
   </div>
   </div>
   </>
