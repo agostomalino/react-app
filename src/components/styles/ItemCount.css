@@ -1,0 +1,17 @@
+.itemCount{
+    display:flex;
+    flex-direction: column;
+    padding: 5px;
+    margin:auto;
+    background-color: rgb(192, 192, 192);
+}
+
+.setCount{
+    display: flex;
+    flex-direction: row;
+    padding: 5px;
+}
+
+.contador{
+    margin:10px
+}
