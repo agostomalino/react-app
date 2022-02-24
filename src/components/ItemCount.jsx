@@ -1,18 +1,23 @@
 import React, { useState } from 'react';
 
-const ItemCount = ({ stock, initial, onAdd }) => {
+import './styles/ItemCount.css'
+
+const ItemCount = ({ stock, initial, onClick }) => {
   const [contador, setContador] = useState(initial);
   
-  function onAdd(){
-   alert("Gracias por su compra")
+  function handleClick(){
+    onClick(contador);
   }
-  
 
   return <>
-    <button className='btn btn-light' onClick={()=> contador < stock ? setContador(contador+1) : console.log("No hay stock disponible")}>Sumar</button>
-    <p>{contador}</p>
-    <button className='btn btn-dark' onClick={() => contador > initial ?  setContador(contador-1) : console.log("No puede seguir realizando esta operacion") }>Restar</button>
-    <button onClick={onAdd}>Agregar al carrito</button>
+    <div className='itemCount'>
+      <div className='setCount'>
+        <button className='btn btn-dark' onClick={() => contador > initial ?  setContador(contador-1) : console.log("No puede seguir realizando esta operacion") }>Restar</button>
+        <p className='contador'>{contador}</p>
+        <button className='btn btn-secondary' onClick={()=> contador < stock ? setContador(contador+1) : console.log("No hay stock disponible")}>Sumar</button>
+      </div>
+      <button className='btn btn-primary' onClick={handleClick}>Agregar al carrito</button>
+    </div>
   </>;
 };
 

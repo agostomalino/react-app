@@ -1,15 +1,12 @@
 import './App.css';
-// import ItemDetailContainer from './components/ItemDetailContainer';
 import Rutas from './routes/Index';
 
 function App() {
-  return <main>
-    
-    <Rutas/>
-    {/* <ItemDetailContainer/> */}
-    
+  return (
+    <main>
+      <Rutas />
     </main>
-
+  )
 }
 
 export default App;
