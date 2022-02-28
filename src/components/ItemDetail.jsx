@@ -5,6 +5,7 @@ import {Link} from 'react-router-dom';
 import "./styles/ItemDetail.css";
 
 const ItemDetail = ({ itemInfo }) => {
+
   const [terminarMiCompra, setTerminarMiCompra] = useState(false);
 
   const handleClick = (cantidad) => {
@@ -22,7 +23,7 @@ const ItemDetail = ({ itemInfo }) => {
         {terminarMiCompra ? (
           <Link to={`/cart`} className="btn btn-primary">Terminar mi compra</Link>
         ) : (
-          <ItemCount stock={itemInfo.stock} initial={1} onClick={handleClick}/>
+          <ItemCount stock={itemInfo.stock} initial={1} onClick={handleClick} item={itemInfo}/>
         )}
       </div>
     </div>
