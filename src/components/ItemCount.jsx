@@ -7,7 +7,7 @@ const ItemCount = ({ stock, initial, onClick,item}) => {
   const [contador, setContador] = useState(initial);
 
   // USE CONTEXT
-  const {carrito, addItem} = useContext(CartContexto)
+  const { addItem} = useContext(CartContexto)
   
   
   function handleClick(){

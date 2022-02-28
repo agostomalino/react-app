@@ -23,7 +23,7 @@ const ItemDetail = ({ itemInfo }) => {
         {terminarMiCompra ? (
           <Link to={`/cart`} className="btn btn-primary">Terminar mi compra</Link>
         ) : (
-          <ItemCount stock={itemInfo.stock} initial={1} onClick={handleClick} item={itemInfo}/>
+          <ItemCount stock={itemInfo.stock} initial={1} onClicko={handleClick} item={itemInfo}/>
         )}
       </div>
     </div>

@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import { CartContexto } from '../../../../context/CartContext'
 
 const CartItem = ({item}) => {
-    const {removeItem, carrito}= useContext(CartContexto)
+    const {removeItem} = useContext(CartContexto)
 
       return (
         <div className='contenedor-producto' id={item.item.id} style={{backgroundColor:'white', margin:"10px"}}>

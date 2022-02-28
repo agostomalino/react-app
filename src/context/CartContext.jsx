@@ -5,8 +5,10 @@ export const CartContexto = createContext();
 
 const CartContext = ({children}) => {
   
-     const[carrito, setCarrito] = useState([]) 
+    const[carrito, setCarrito] = useState([]) 
 
+    
+    
     const addItem = (item, cantidad) => {
         let exists = false;
         
@@ -30,15 +32,14 @@ const CartContext = ({children}) => {
     }
 //eliminar un item del carrito
      const removeItem = (id) => {
-          let verificar = carrito.find(element => element.item.id === id)
-          console.log(id,verificar.cantidad)
+         let copyCart = [...carrito];
+          let verificar = copyCart.find(element => element.item.id === id)
           if(verificar){
                 if(verificar.cantidad > 1){ 
                     verificar.cantidad = verificar.cantidad -1 
-                    setCarrito(carrito, verificar.cantidad)
-                    console.log("carrito en el if reductor ", carrito)
+                    setCarrito(copyCart)
                 }else{
-                    setCarrito([carrito.filter(element => element.item.id !== id)])
+                    setCarrito(copyCart.filter(element => element.item.id !== id))
                 
           }
           }

@@ -9,7 +9,7 @@ const CartWidget = () => {
   return (
   <>
       <Link to={"/cart"}className='btn btn-light'>
-      <i className="fas fa-shopping-cart"></i>{carrito.lenght}
+      <i className="fas fa-shopping-cart"></i>{carrito.length}
       </Link>
   </>
   )
