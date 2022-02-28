@@ -32,17 +32,16 @@ const CartContext = ({children}) => {
      const removeItem = (id) => {
           let verificar = carrito.find(element => element.item.id === id)
           console.log(id,verificar.cantidad)
-          console.log(verificar)
-          if(verificar.cantidad > 1){ 
-              let nuevaCantidad = verificar.cantidad -1 
-              setCarrito([...carrito, {item: verificar, cantidad:nuevaCantidad}])
-              
-              console.log("carrito en el if reductor ", carrito)
-          }else{
-              setCarrito([carrito.filter(element => element.item.id !== id)])
-          
+          if(verificar){
+                if(verificar.cantidad > 1){ 
+                    verificar.cantidad = verificar.cantidad -1 
+                    setCarrito(carrito, verificar.cantidad)
+                    console.log("carrito en el if reductor ", carrito)
+                }else{
+                    setCarrito([carrito.filter(element => element.item.id !== id)])
+                
           }
-        
+          }
     }
 
     const clear = () =>{
