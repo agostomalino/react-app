@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import ItemList from './ItemList';
 import {  useEffect } from 'react';
 import {  useParams } from 'react-router-dom';
+import "./styles/ItemListContainer.css"
 
 const ItemListContainer = ({greeting}) => {
   const {
@@ -69,8 +70,10 @@ const ItemListContainer = ({greeting}) => {
 
   return (
     <div>
-      <h5> {greeting} </h5> 
-      <ItemList items = {info}/> 
+      <h5> {greeting} </h5>
+      <div id='itemlistContainer'>
+        <ItemList items = {info}/> 
+      </div>
     </div>
   );
 };

@@ -5,10 +5,11 @@ export const CartContexto = createContext();
 
 const CartContext = ({children}) => {
   
+    // Estado del cart
     const[carrito, setCarrito] = useState([]) 
 
     
-    
+    // fn que agrega items al cart
     const addItem = (item, cantidad) => {
         let exists = false;
         
@@ -30,25 +31,30 @@ const CartContext = ({children}) => {
     
 
     }
-//eliminar un item del carrito
-     const removeItem = (id) => {
-         let copyCart = [...carrito];
-          let verificar = copyCart.find(element => element.item.id === id)
-          if(verificar){
-                if(verificar.cantidad > 1){ 
-                    verificar.cantidad = verificar.cantidad -1 
-                    setCarrito(copyCart)
-                }else{
-                    setCarrito(copyCart.filter(element => element.item.id !== id))
+    //eliminar un item del carrito
+    const removeItem = (id) => {
+        let copyCart = [...carrito];
+        let verificar = copyCart.find(element => element.item.id === id)
+        if(verificar){
+            if(verificar.cantidad > 1){ 
+                verificar.cantidad = verificar.cantidad -1 
+                setCarrito(copyCart)
+            }else{
+                setCarrito(copyCart.filter(element => element.item.id !== id))
                 
-          }
-          }
+            }
+        }
     }
-
+    // fn que borra todos los items del cart
     const clear = () =>{
         setCarrito([])
         
     } 
+
+    
+    
+  
+    
     
 
    

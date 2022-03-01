@@ -21,7 +21,7 @@ const ItemCount = ({ stock, initial, onClick,item}) => {
         <p className='contador'>{contador}</p>
         <button className='btn btn-secondary' onClick={()=> contador < stock ? setContador(contador+1) : console.log("No hay stock disponible")}>Sumar</button>
       </div>
-      <button className='btn btn-primary' onClick={handleClick} onClick={()=>addItem(item,contador)}>Agregar al carrito</button>
+      <button className='btn btn-primary'  onClick={()=>addItem(item,contador)|| handleClick()}>Agregar al carrito</button>
     </div>
   </>;
 };
