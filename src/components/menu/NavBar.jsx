@@ -1,8 +1,12 @@
-import React from "react";
+import {useContext} from "react";
 import CartWidget from "./CartWidget";
 import { NavLink } from "react-router-dom";
+import { CartContexto } from '../../context/CartContext';
 
 function NavBar({ textoDeLogo }) {
+
+  const {carrito} = useContext(CartContexto);
+
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container-fluid">
@@ -38,7 +42,7 @@ function NavBar({ textoDeLogo }) {
               </NavLink>
             </li>
           </ul>
-          <CartWidget />
+          {(carrito.length !==0) && <CartWidget/>}
         </div>
       </div>
     </nav>

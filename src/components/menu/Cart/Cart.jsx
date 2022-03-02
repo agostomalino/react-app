@@ -5,13 +5,11 @@ import { Link } from 'react-router-dom';
 
 const Cart = () => {
 
-  const{carrito , clear} = useContext(CartContexto);
+  const{carrito , clear, totalPrice,cantidadItems} = useContext(CartContexto);
 
-
-
+    
 
     if(carrito.length === 0){
-      console.log("El carrito NO tiene items")
       return(
         <div className='cartEmpty'>
           <h4>No hay productos en el carrito</h4>
@@ -20,21 +18,18 @@ const Cart = () => {
 
       )
     }
-     
-    
-
-
   
-  return ( 
-  <>
+    return ( 
+      <>
 
-    <div className='carritoContainer' style={{margin:"20px", padding:"20px", backgroundColor:"gray", width:"auto", height:"auto"}}>
-        {carrito && carrito.map((item, index) =><CartItem item={item} key={index}/>)}
-        <button className="btn btn-danger" style={{margin:"auto"}} onClick={() => clear() }>Eliminar todos los productos del Carrito</button>
-    </div>
+        <div className='carritoContainer' style={{margin:"20px", padding:"20px", width:"auto", height:"auto"}}>
+            {carrito && carrito.map((item, index) =><CartItem item={item} key={index}/>)}
+            <p>Cantidad de productos: {cantidadItems}</p>
+            <h6>Precio total: ${totalPrice}</h6>
+            <button className="btn btn-danger" style={{margin:"auto"}} onClick={() => clear() }>Eliminar todos los productos del Carrito</button>
+        </div>
 
-  </>
-
+      </>
   )
 }
 
