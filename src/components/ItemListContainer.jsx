@@ -5,12 +5,12 @@ import {  useParams } from 'react-router-dom';
 import "./styles/ItemListContainer.css";
 import db from './../service/firebase';
 import { collection,getDocs } from 'firebase/firestore/lite';
-import { query,where } from 'firebase/firestore/lite';
+
 
 
 const ItemListContainer = ({greeting}) => {
   const [items, setItems] = useState([]);
-  const { category } = useParams();
+  const { categoryId } = useParams();
 
   const getData = async () =>{
     
@@ -18,58 +18,26 @@ const ItemListContainer = ({greeting}) => {
       const data = collection(db, "items")
       const col = await getDocs(data)
       const result = col.docs.map((doc) => doc = {id: doc.id, ...doc.data()})
-      setItems(result)
       
+      if(!categoryId){
+        setItems(result)
+      }else if (categoryId){
+        let resultCategory = result.filter((el) => el.category === categoryId);
+        console.log(resultCategory)
+        setItems(resultCategory)
+      }
     } catch (error) {
       console.log(error);
     }
 
   } 
 
- const getDataSuminagashi = async (category) =>{
-  try{
-    const data = collection(db,"items");
-    const Q = query(data, where("category","==", "suminagashi"));
-    const itemsCategoryColection = await getDocs(Q);
-    const result = itemsCategoryColection.docs.map(item =>{
-      return {...item.data(), id: item.id}
-    });
-    console.log(result)
-    return result
-  }
-  catch(err){
-    console.error(err)
-  }
-}
-
-const getDataOtros = async (category) =>{
-  try{
-    const data = collection(db,"items");
-    const Q = query(data, where("category","==", "otros"));
-    const itemsCategoryColection = await getDocs(Q);
-    const result = itemsCategoryColection.docs.map(item =>{
-      return {...item.data(), id: item.id}
-    });
-    console.log(result)
-    return result
-  }
-  catch(err){
-    console.error(err)
-  }
-}
-
   
   useEffect(() => {
-    
-    if(!category){
-      getData()
-    }else if (category == "suminagashi"){
-      getDataSuminagashi(category)
-    }else{
-      getDataOtros(category)
-    }
 
-  }, [category]
+    getData()
+
+  }, [categoryId]
   );
 
 

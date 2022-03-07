@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
-// import { async } from "@firebase/util";
 import { initializeApp } from "firebase/app";
 import {collection, getDocs, getFirestore, query,where} from 'firebase/firestore/lite'
+
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -20,37 +20,3 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 export default db
-
-
-
-
-// export async function getAllItems(){
-//   try{
-//     const data = collection(db,"items");
-//     const itemsColection = await getDocs(data);
-//     const result = itemsColection.docs.map(item =>{
-//       return {...item.data(), id: item.id}
-//     });
-//     return result
-//   }
-//   catch(err){
-//     console.error(err)
-//   }
-// }
-
-
-// export async function getItemsCategory(category){
-//   try{
-//     const data = collection(db,"items");
-//     const itemsCategoryColection = await getDocs(Q);
-//     const Q = query(data, where("category","==", category));
-//     const result = itemsCategoryColection.docs.map(item =>{
-//       return {...item.data(), id: item.id}
-//     });
-//     console.log(result)
-//     return result
-//   }
-//   catch(err){
-//     console.error(err)
-//   }
-// }
