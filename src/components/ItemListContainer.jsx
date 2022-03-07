@@ -9,8 +9,8 @@ import { query,where } from 'firebase/firestore/lite';
 
 
 const ItemListContainer = ({greeting}) => {
-  const { category } = useParams();
   const [items, setItems] = useState([]);
+  const { category } = useParams();
 
   const getData = async () =>{
     
@@ -26,10 +26,26 @@ const ItemListContainer = ({greeting}) => {
 
   } 
 
- const getDataCategory = async (category) =>{
+ const getDataSuminagashi = async (category) =>{
   try{
     const data = collection(db,"items");
-    const Q = query(data, where("category","==", category));
+    const Q = query(data, where("category","==", "suminagashi"));
+    const itemsCategoryColection = await getDocs(Q);
+    const result = itemsCategoryColection.docs.map(item =>{
+      return {...item.data(), id: item.id}
+    });
+    console.log(result)
+    return result
+  }
+  catch(err){
+    console.error(err)
+  }
+}
+
+const getDataOtros = async (category) =>{
+  try{
+    const data = collection(db,"items");
+    const Q = query(data, where("category","==", "otros"));
     const itemsCategoryColection = await getDocs(Q);
     const result = itemsCategoryColection.docs.map(item =>{
       return {...item.data(), id: item.id}
@@ -45,15 +61,17 @@ const ItemListContainer = ({greeting}) => {
   
   useEffect(() => {
     
-    let requestDatos = category ? getData() : getDataCategory(category);
-
-    requestDatos
-    .then((itemsPromise) =>{
-      setItems(itemsPromise)
-    })
+    if(!category){
+      getData()
+    }else if (category == "suminagashi"){
+      getDataSuminagashi(category)
+    }else{
+      getDataOtros(category)
+    }
 
   }, [category]
   );
+
 
   return (
     <div>
