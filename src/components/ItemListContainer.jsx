@@ -2,80 +2,126 @@ import React, { useState } from 'react';
 import ItemList from './ItemList';
 import {  useEffect } from 'react';
 import {  useParams } from 'react-router-dom';
-import "./styles/ItemListContainer.css"
+import "./styles/ItemListContainer.css";
+import db from './../service/firebase';
+import { collection,getDocs } from 'firebase/firestore/lite';
+import { query,where } from 'firebase/firestore/lite';
+
 
 const ItemListContainer = ({greeting}) => {
-  const {
-    category
-  } = useParams()
+  const { category } = useParams();
+  const [items, setItems] = useState([]);
 
-  const productos = [{
-      id: 1,
-      title: "Fiori",
-      description: "esto es una descripcion",
-      category:"suminagashi",
-      precio: 500,
-      img: "/imagenes/img1.jpeg",
-      stock: 10
-    },
-    {
-      id: 2,
-      title: "Lento",
-      description: "esto es una descripcion",
-      category:"suminagashi",
-      precio: 3000,
-      img: "/imagenes/img2.jpeg",
-      stock: 10
-    },
-    {
-      id: 3,
-      title: "Sol",
-      description: "esto es una descripcion",
-      category:"otros",
-      precio: 7500,
-      img: "/imagenes/img3.jpeg",
-      stock: 11
-    },
-    {
-      id: 4,
-      title: "Jupiter",
-      description: "esto es una descripcion",
-      category:"otros",
-      img: "/imagenes/img4.jpeg",
-      precio: 8500,
-      stock: 40
+  const getData = async () =>{
+    
+    try {
+      const data = collection(db, "items")
+      const col = await getDocs(data)
+      const result = col.docs.map((doc) => doc = {id: doc.id, ...doc.data()})
+      setItems(result)
+      
+    } catch (error) {
+      console.log(error);
     }
-  ];
-  const [info, setInfo] = useState(null);
 
+  } 
+
+ const getDataCategory = async (category) =>{
+  try{
+    const data = collection(db,"items");
+    const Q = query(data, where("category","==", category));
+    const itemsCategoryColection = await getDocs(Q);
+    const result = itemsCategoryColection.docs.map(item =>{
+      return {...item.data(), id: item.id}
+    });
+    console.log(result)
+    return result
+  }
+  catch(err){
+    console.error(err)
+  }
+}
+
+  
   useEffect(() => {
-    const tarea = new Promise((resolve, reject) => {
-      setTimeout(() => {
-        if(category){
-          resolve(productos.filter((item) => item.category === category));
-        }
-        resolve(productos)
-      }, 500);
+    
+    let requestDatos = category ? getData() : getDataCategory(category);
+
+    requestDatos
+    .then((itemsPromise) =>{
+      setItems(itemsPromise)
     })
 
-    tarea
-      .then((result) => {
-        setInfo(result);
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-  }, [category])
-
+  }, [category]
+  );
 
   return (
     <div>
       <h5> {greeting} </h5>
       <div id='itemlistContainer'>
-        <ItemList items = {info}/> 
+        <ItemList items = {items}/> 
       </div>
     </div>
   );
 };
 
 export default ItemListContainer;
+
+
+  // const productos = [{
+  //     id: 1,
+  //     title: "Fiori",
+  //     description: "esto es una descripcion",
+  //     category:"suminagashi",
+  //     precio: 500,
+  //     img: "/imagenes/img1.jpeg",
+  //     stock: 10
+  //   },
+  //   {
+  //     id: 2,
+  //     title: "Lento",
+  //     description: "esto es una descripcion",
+  //     category:"suminagashi",
+  //     precio: 3000,
+  //     img: "/imagenes/img2.jpeg",
+  //     stock: 10
+  //   },
+  //   {
+  //     id: 3,
+  //     title: "Mapa",
+  //     description: "esto es una descripcion",
+  //     category:"otros",
+  //     precio: 7500,
+  //     img: "/imagenes/img3.jpeg",
+  //     stock: 11
+  //   },
+  //   {
+  //     id: 4,
+  //     title: "Jupiter",
+  //     description: "esto es una descripcion",
+  //     category:"otros",
+  //     img: "/imagenes/img4.jpeg",
+  //     precio: 8500,
+  //     stock: 40
+  //   }
+  // ];
+  // const [info, setInfo] = useState(null);
+
+  // useEffect(() => {
+  //   const tarea = new Promise((resolve, reject) => {
+  //     setTimeout(() => {
+  //       if(category){
+  //         resolve(productos.filter((item) => item.category === category));
+  //       }
+  //       resolve(productos)
+  //     }, 500);
+  //   })
+
+  //   tarea
+  //     .then((result) => {
+  //       setInfo(result);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     })
+  // }, [category])
