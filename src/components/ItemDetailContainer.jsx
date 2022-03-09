@@ -1,32 +1,42 @@
 import React, {
-  useEffect,
-  useState,
+  useEffect
 } from 'react'
 import {
   useParams
 } from 'react-router-dom'
 import ItemDetail from './ItemDetail'
-import db from './../service/firebase';
-import { collection,getDocs } from 'firebase/firestore/lite';
+import useFireStore from '../hooks/useFireStore';
 
 
 
 const ItemDetailContainer = () => {
 
   const { id } = useParams()
-  const [detalle, setDetalles] = useState(null)
 
 
-  const getItemsById = async (id)=>{
-    const data = collection(db, "items")
-    const col = await getDocs(data)
-    const result = col.docs.map((doc) => doc = {id: doc.id, ...doc.data()})
-    let itemFound = result.find((item) => item.id === Number(id));
-    setDetalles(itemFound)
-  }
-useEffect(() =>{
-  getItemsById(id)
-},[])
+  const {individual,getIndividualData,load} = useFireStore();
+
+
+  useEffect(() => {
+
+    getIndividualData({id})
+
+
+  },[])
+
+
+
+//   const getItemsById = async (id)=>{
+//     const data = collection(db, "items")
+//     const col = await getDocs(data)
+//     const result = col.docs.map((doc) => doc = {id: doc.id, ...doc.data()})
+//     let itemFound = result.find((item) => item.id === Number(id));
+//     console.log(itemFound)
+//     setDetalles(itemFound)
+//   }
+// useEffect(() =>{
+//   getItemsById(id)
+// },[])
 
 
   // useEffect(() => {
@@ -52,9 +62,11 @@ useEffect(() =>{
 
   return ( <> 
     {
-      detalle ?
-       <ItemDetail itemInfo = { detalle }/> 
-      : <h4>Cargando Productos...</h4 >
+      load ?
+      <h4>Cargando Productos...</h4 >
+      :
+       <ItemDetail itemInfo = { individual }/> 
+      
     } 
     </>
   )
