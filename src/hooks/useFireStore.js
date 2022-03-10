@@ -1,13 +1,16 @@
-import { collection,getDocs,doc, getDoc, addDoc } from "firebase/firestore/lite"
+import { collection,getDocs,doc, getDoc, addDoc, updateDoc } from "firebase/firestore/lite"
 import db from "../service/firebase"
 import { useState } from 'react';
+import { useNavigate } from "react-router-dom";
 
 
 const useFireStore = () =>{
   
     const [items, setItems] = useState([]);
-    const [individual, setIndividual] = useState({})
-    const [load, setLoad] = useState(false)
+    const [individual, setIndividual] = useState({});
+    const [load, setLoad] = useState(false);
+
+    let navigate = useNavigate();
 //
     const getData = async () =>{
       setLoad(true)
@@ -52,8 +55,12 @@ const useFireStore = () =>{
       
       setLoad(true)
       try {
-        const col = collection(db,"orders")
-        const order = await addDoc(col, datos)
+        const col = collection(db,"orders");
+        const order = await addDoc(col, datos);
+        datos.items.map((e) => {
+          actualizarStock(e.id,e.item.stock - e.cantidad)
+          console.log(e)
+        })
         setLoad(false)
         alert(order.id)
       } catch (error) {
@@ -62,6 +69,18 @@ const useFireStore = () =>{
       }
     }
 
+    const actualizarStock = async (id, stock) => {
+      const itemsOrden = doc(db, "items", id);
+
+      try {
+        await updateDoc(itemsOrden, { stock: stock });
+        let path = '/order'
+        navigate(path)
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
 
     return{
         getData,
@@ -69,7 +88,9 @@ const useFireStore = () =>{
         individual,
         getIndividualData,
         load,
-        generateOrder
+        generateOrder,
+        actualizarStock
+        
 
     }
 }

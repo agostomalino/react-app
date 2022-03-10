@@ -25,7 +25,7 @@ const Cart = () => {
 
         <div className='carritoContainer w-100 d-flex justify-content-around' style={{margin:"20px", padding:"20px", height:"auto"}}>
 
-            <Checkout carrito={carrito}/>
+            <Checkout carrito={carrito} totalPrice={totalPrice}/>
 
             <div className='d-flex flex-column'>
               
