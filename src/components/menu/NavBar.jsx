@@ -28,7 +28,7 @@ function NavBar({ textoDeLogo }) {
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
               <NavLink className="nav-link active" aria-current="page" to={"/"}>
-                Home
+                Inicio
               </NavLink>
             </li>
             <li className="nav-item">
@@ -38,7 +38,7 @@ function NavBar({ textoDeLogo }) {
             </li>
             <li className="nav-item">
               <NavLink className="nav-link" to={"/category/otros"}>
-                Otras obras
+                Fotografía analógica
               </NavLink>
             </li>
           </ul>

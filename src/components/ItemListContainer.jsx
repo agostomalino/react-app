@@ -1,17 +1,15 @@
-// import React, { useState } from 'react';
+
 import ItemList from './ItemList';
 import {  useEffect } from 'react';
-import {  useParams } from 'react-router-dom';
 import "./styles/ItemListContainer.css";
-// import db from '../service/firebase';
-// import { collection,getDocs } from 'firebase/firestore/lite';
 import useFireStore from '../hooks/useFireStore';
+import { useParams } from 'react-router-dom';
 
 
 
 const ItemListContainer = ({greeting}) => {
   
-
+  let {categoryId} = useParams();
   const {items,getData} = useFireStore()
 
   
@@ -19,13 +17,13 @@ const ItemListContainer = ({greeting}) => {
 
     getData()
 
-  }, []
+  }, [categoryId]
   );
 
 
   return (
     <div>
-      <h5> {greeting} </h5>
+      <h5 className='greeting'> {greeting} </h5>
       <div id='itemlistContainer'>
         <ItemList items ={items}/> 
       </div>

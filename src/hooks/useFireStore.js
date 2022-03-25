@@ -1,7 +1,7 @@
-import { collection,getDocs,doc, getDoc, addDoc, updateDoc } from "firebase/firestore/lite"
+import { collection,getDocs,doc, getDoc, addDoc, updateDoc} from "firebase/firestore/lite"
 import db from "../service/firebase"
 import { useState } from 'react';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 
 const useFireStore = () =>{
@@ -9,9 +9,11 @@ const useFireStore = () =>{
     const [items, setItems] = useState([]);
     const [individual, setIndividual] = useState({});
     const [load, setLoad] = useState(false);
-
+    const [orderId, setOrderId] = useState()
+    let{categoryId} = useParams();
     let navigate = useNavigate();
-//
+
+  // fn para obtener todos los items
     const getData = async () =>{
       setLoad(true)
         try {
@@ -19,23 +21,22 @@ const useFireStore = () =>{
           const col = await getDocs(data)
           const result = col.docs.map((doc) => doc = {id: doc.id, ...doc.data()})
           
-          // if(!category){
-          //   setItems(result)
-          // }else if (category){
-          //   let resultCategory = result.filter((el) => el.category === category);
-          //   setItems(resultCategory)
-          // }
-
-          setItems(result)
+          if(categoryId === undefined){
+            setItems(result)
+          }else if(categoryId){
+            let resultCategory = result.filter((el) => el.category === categoryId);
+            setItems(resultCategory)
+          }
+          
           setLoad(false)
+          
         } catch (error) {
           console.log(error);
           setLoad(false)
-        }
-    
+        }    
     } 
-//  fn para encontrar doc por id
 
+//  fn para encontrar doc por id
     const getIndividualData = async ({id}) =>{
       setLoad(true)
       try {
@@ -51,6 +52,8 @@ const useFireStore = () =>{
       }
     }
 
+
+  //fn para generar Orden de compra
     const generateOrder = async ({datos}) => {
       
       setLoad(true)
@@ -59,16 +62,16 @@ const useFireStore = () =>{
         const order = await addDoc(col, datos);
         datos.items.map((e) => {
           actualizarStock(e.id,e.item.stock - e.cantidad)
-          console.log(e)
         })
         setLoad(false)
-        alert(order.id)
+        setOrderId(order.id)
       } catch (error) {
         console.log(error)
         setLoad(false)
       }
     }
 
+  //fn para Actualizar Stock
     const actualizarStock = async (id, stock) => {
       const itemsOrden = doc(db, "items", id);
 
@@ -89,9 +92,8 @@ const useFireStore = () =>{
         getIndividualData,
         load,
         generateOrder,
-        actualizarStock
-        
-
+        actualizarStock,
+        orderId
     }
 }
 

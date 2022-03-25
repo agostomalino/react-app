@@ -8,13 +8,13 @@ const Item = ({itemInfo}) => {
   return<> 
   <div className='card'>
   <div>
-    <img src={itemInfo.img} width="200px"/>
-    <h5>{itemInfo.title}</h5>
-    <p>{itemInfo.description}</p>
-    <p>{itemInfo.category}</p>
-    <p>{itemInfo.precio}</p>
-    <p>Stock: {itemInfo.stock} </p>
-    <Link to={`/item/${itemInfo.id}`} className='btn btn-primary'>Ver detalle del producto</Link>
+    <img className='itemImg'src={itemInfo.img} width="200px" alt={itemInfo.description}/>
+    <h5 className='itemTitle'>{itemInfo.title}</h5>
+    <p className='itemDescription'>{itemInfo.description}</p>
+    <p className='itemCategory'>{itemInfo.category}</p>
+    <p className='itemPrecio'>{itemInfo.precio}</p>
+    <p className='itemStock'>Stock: {itemInfo.stock} </p>
+    <Link to={`/item/${itemInfo.id}`} className='btn btn-light'>Ver detalle del producto</Link>
 
   </div>
   </div>
