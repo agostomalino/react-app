@@ -3,6 +3,7 @@ import { CartContexto } from '../../../context/CartContext'
 import CartItem from './CartItem.jsx/CartItem';
 import { Link } from 'react-router-dom';
 import Checkout from '../Checkout';
+import '../../styles/Cart.css'
 
 const Cart = () => {
 
@@ -14,7 +15,7 @@ const Cart = () => {
       return(
         <div className='cartEmpty'>
           <h4>No hay productos en el carrito</h4>
-          <Link to={'/'} className='btn btn-primary'>Volver a la Tienda</Link>
+          <Link to={'/'} className='btn btn-secondary'>Volver a la Tienda</Link>
         </div>
 
       )
@@ -27,7 +28,7 @@ const Cart = () => {
 
             <Checkout carrito={carrito} totalPrice={totalPrice}/>
 
-            <div className='d-flex flex-column'>
+            <div className='d-flex flex-column contenedor-carro'>
               
               {carrito && carrito.map((item, index) =><CartItem item={item} key={index}/>)}
               <p>Cantidad de productos: {cantidadItems}</p>

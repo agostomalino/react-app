@@ -3,7 +3,9 @@
     flex-direction: column;
     padding: 5px;
     margin:auto;
-    background-color: rgb(192, 192, 192);
+    align-items: center;
+    background-color: rgb(235, 224, 224);
+    border-radius: 3%;
 }
 
 .setCount{
@@ -11,7 +13,9 @@
     flex-direction: row;
     padding: 5px;
 }
-
+.btnAgregar{
+    width: 100%;
+}
 .contador{
     margin:10px
 }

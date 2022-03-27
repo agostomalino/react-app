@@ -13,15 +13,17 @@ const ItemDetail = ({ itemInfo }) => {
   }
 
   return itemInfo ? (
-    <div className="card">
+    <div className="card detalleCard">
       <img width="200px" src={itemInfo.img} alt={itemInfo.title} />
-      <div>
-        <h5>{itemInfo.title}</h5>
-        <p>{itemInfo.description}</p>
-        <p>{itemInfo.precio}</p>
-        <p>Stock: {itemInfo.stock} </p>
+      <div className="containerInfo">
+        <div className="itemInfo">
+          <h5>{itemInfo.title}</h5>
+          <p>{itemInfo.description}</p>
+          <p>{itemInfo.precio}</p>
+          <p>Stock: {itemInfo.stock} </p>
+        </div>
         {terminarMiCompra ? (
-          <Link to={`/cart`} className="btn btn-primary">Terminar mi compra</Link>
+          <Link to={`/cart`} className="btn btn-primary btnTerminar">Terminar mi compra</Link>
         ) : (
           <ItemCount stock={itemInfo.stock} initial={1} onClick={handleClick} item={itemInfo}/>
         )}

@@ -5,6 +5,7 @@ import Cart from "../components/menu/Cart/Cart";
 import ItemDetailContainer from "../components/ItemDetailContainer";
 import NavBar from "../components/menu/NavBar";
 import Order from "../components/menu/Order";
+import Footer from "../components/Footer";
 
 const Rutas = () => {
   return (
@@ -17,6 +18,7 @@ const Rutas = () => {
         <Route path="/cart" element={<Cart/>} />
         <Route path="/order" element={<Order/>}/>
       </Routes>
+      <Footer/>
     </BrowserRouter>
   );
 };

@@ -1,18 +1,20 @@
 import React from 'react'
-import { useParams } from 'react-router-dom'
-import useFireStore from '../../hooks/useFireStore'
+import { useLocation } from 'react-router-dom'
+import '../styles/Order.css'
+
 
 
 const Order = () => {
-    const {params} = useParams()
-    console.log(params)
-    const { orderId } = useFireStore()
+
+  const {state} = useLocation();
+
+
     return (
-    <div>
-    <i class="fa-thin fa-check"></i>
-    <h2 className="title">Tu compra ha sido realizada con éxito.</h2>
-    <p>Código de orden:{orderId}</p>
-    <h4 className='text'>Gracias por comprar arte local!</h4>
+    <div className='containerOrder'>
+    <i className="fa-thin fa-check"></i>
+    <h2 className="titleOrder">Tu compra ha sido realizada con éxito.</h2>
+    <p>Código de orden: <b>{state.orderId}</b></p>
+    <h4 className='textOrder'>Gracias por comprar arte local!</h4>
 
     </div>
   )

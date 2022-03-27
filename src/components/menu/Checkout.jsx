@@ -1,11 +1,14 @@
 import {useState} from 'react'
 import useFireStore from '../../hooks/useFireStore'
+import { useNavigate } from 'react-router-dom'
 
 
 
 const Checkout = ({carrito,totalPrice}) => {
 
-    const {generateOrder} = useFireStore()
+    const {generateOrder} = useFireStore();
+    const navigate = useNavigate();
+
     
 
     const [form, setForm] = useState({
@@ -28,12 +31,16 @@ const Checkout = ({carrito,totalPrice}) => {
         });
     }
 
-    const handleSubmit = (e) =>{
+    const handleSubmit = async (e) =>{
         e.preventDefault()
-        generateOrder({datos:form})
+        const id = await generateOrder({datos:form})
+        navigate("/order", {state:{orderId:id}})
+        return id
+
 
     }
 
+  
     
 
   return (

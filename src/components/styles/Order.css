@@ -1,0 +1,10 @@
+.containerOrder{
+    margin: 20px auto;
+    padding: 10rem;
+    text-align: center;    
+}
+.textOrder{
+    color:gray;
+    font-style: oblique;
+    font-weight: lighter;
+}

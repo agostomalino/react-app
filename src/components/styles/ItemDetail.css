@@ -1,9 +1,33 @@
-.card {
+div .detalleCard {
     width: auto;
-    height: auto;
-    margin: 0px;
+    height: 100vh;
+    margin: 1rem;
     display: flex;
     flex-direction: row;
     align-items: center;
-    padding: 10px;
+    justify-content:center;
+    padding: 3rem;
+}
+.containerInfo{
+    display: flex;
+}
+.itemInfo{
+    margin-left: 2rem;
+    margin-right: 2rem;
+}
+img{
+    width: 40%;
+    height: auto;
+}
+.itemCount{
+    width: auto;
+}
+.btnTerminar{
+    height: auto;
+}
+.cargandoTitle{
+    margin:auto;
+    padding-top: 5rem;
+    padding: 1rem;
+    text-align: center;
 }

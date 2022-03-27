@@ -6,7 +6,7 @@ import './styles/Item.css'
 const Item = ({itemInfo}) => {
  
   return<> 
-  <div className='card'>
+  <div className='itemCard'>
   <div>
     <img className='itemImg'src={itemInfo.img} width="200px" alt={itemInfo.description}/>
     <h5 className='itemTitle'>{itemInfo.title}</h5>

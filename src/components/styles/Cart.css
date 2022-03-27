@@ -1,0 +1,11 @@
+.contenedor-carro{
+    margin:1rem;
+    padding:1rem;
+    align-items: center;
+    width: 60%;
+}
+.cartEmpty{
+    margin: 1rem;
+    padding: 6rem;
+    text-align: center;
+}

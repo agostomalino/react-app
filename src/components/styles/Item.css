@@ -1,5 +1,11 @@
-/* .card{
-    margin-bottom: 15px;
-    background-color: grey;
-} */
-/* estos estilos son pisados por ItemDetail.css */
+.itemCard{
+    padding: .5rem;
+    /* background-color: rgb(250, 246, 246); */
+    display: flex;
+    align-items: center;
+    text-align: center;
+    border-color: grey;
+}
+img .itemImg{
+    height: 80%;
+}

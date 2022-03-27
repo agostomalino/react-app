@@ -1,7 +1,8 @@
 import { collection,getDocs,doc, getDoc, addDoc, updateDoc} from "firebase/firestore/lite"
 import db from "../service/firebase"
 import { useState } from 'react';
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
+
 
 
 const useFireStore = () =>{
@@ -9,9 +10,9 @@ const useFireStore = () =>{
     const [items, setItems] = useState([]);
     const [individual, setIndividual] = useState({});
     const [load, setLoad] = useState(false);
-    const [orderId, setOrderId] = useState()
+
     let{categoryId} = useParams();
-    let navigate = useNavigate();
+
 
   // fn para obtener todos los items
     const getData = async () =>{
@@ -60,30 +61,34 @@ const useFireStore = () =>{
       try {
         const col = collection(db,"orders");
         const order = await addDoc(col, datos);
-        datos.items.map((e) => {
-          actualizarStock(e.id,e.item.stock - e.cantidad)
-        })
         setLoad(false)
-        setOrderId(order.id)
+
+        actualizarStock(datos.items)
+
+        return order.id
+
       } catch (error) {
         console.log(error)
         setLoad(false)
       }
     }
 
-  //fn para Actualizar Stock
-    const actualizarStock = async (id, stock) => {
-      const itemsOrden = doc(db, "items", id);
 
-      try {
-        await updateDoc(itemsOrden, { stock: stock });
-        let path = '/order'
-        navigate(path)
-      } catch (err) {
-        console.log(err);
-      }
+  // fn para Actualizar Stock
+    const actualizarStock = async (items) => {
+
+      items.forEach((element) => {
+        const itemsOrden = doc(db, "items", element.id);
+        try {
+
+          updateDoc(itemsOrden,{stock: element.stock - element.cantidad});
+        
+        } catch (error) {
+          console.log(error)
+        }
+      });
+
     };
-
 
     return{
         getData,
@@ -92,8 +97,8 @@ const useFireStore = () =>{
         getIndividualData,
         load,
         generateOrder,
-        actualizarStock,
-        orderId
+        actualizarStock
+
     }
 }
 

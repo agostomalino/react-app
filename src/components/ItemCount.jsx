@@ -17,11 +17,11 @@ const ItemCount = ({ stock, initial, onClick,item}) => {
   return <>
     <div className='itemCount'>
       <div className='setCount'>
-        <button className='btn btn-dark' onClick={() => contador > initial ?  setContador(contador-1) : console.log("No puede seguir realizando esta operacion") }>Restar</button>
+        <button className='btn btn-light' onClick={() => contador > initial ?  setContador(contador-1) : console.log("No puede seguir realizando esta operacion") }>-</button>
         <p className='contador'>{contador}</p>
-        <button className='btn btn-secondary' onClick={()=> contador < stock ? setContador(contador+1) : console.log("No hay stock disponible")}>Sumar</button>
+        <button className='btn btn-light' onClick={()=> contador < stock ? setContador(contador+1) : console.log("No hay stock disponible")}>+</button>
       </div>
-      <button className='btn btn-primary'  onClick={()=>addItem(item,contador)|| handleClick()}>Agregar al carrito</button>
+      <button className='btn btn-secondary btnAgregar'  onClick={()=>addItem(item,contador)|| handleClick()}>Agregar al carrito</button>
     </div>
   </>;
 };
