@@ -1,6 +1,8 @@
-import {useState} from 'react'
-import useFireStore from '../../hooks/useFireStore'
-import { useNavigate } from 'react-router-dom'
+import {useState, useContext} from 'react';
+import useFireStore from '../../hooks/useFireStore';
+import { useNavigate } from 'react-router-dom';
+import { CartContexto } from '../../context/CartContext';
+
 
 
 
@@ -8,8 +10,8 @@ const Checkout = ({carrito,totalPrice}) => {
 
     const {generateOrder} = useFireStore();
     const navigate = useNavigate();
-
     
+    const { clear } = useContext(CartContexto)
 
     const [form, setForm] = useState({
         buyer:{
@@ -35,6 +37,7 @@ const Checkout = ({carrito,totalPrice}) => {
         e.preventDefault()
         const id = await generateOrder({datos:form})
         navigate("/order", {state:{orderId:id}})
+        clear();
         return id
 
 
@@ -56,7 +59,6 @@ const Checkout = ({carrito,totalPrice}) => {
         <div className="mb-3">
             <label  className="form-label">Ingrese su email</label>
             <input onChange={handleChange} name="email" value={form.buyer.email}type="email" className="form-control" aria-describedby="emailHelp"/>
-            <div className="form-text">We'll never share your email with anyone else.</div>
         </div>
 
         <button disabled={!form.buyer.name || !form.buyer.phone || !form.buyer.email }type="submit" className="btn btn-primary w-100">Comprar</button>

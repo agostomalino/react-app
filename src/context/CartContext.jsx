@@ -61,6 +61,7 @@ const CartContext = ({children}) => {
     useEffect( () => {
         actualizarCantidad()
         precioTotal()
+
     }, [carrito])
 
 
