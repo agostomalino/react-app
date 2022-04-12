@@ -8,3 +8,18 @@
     font-style: oblique;
     font-weight: lighter;
 }
+
+@media (max-width: 575.98px)and (orientation:portrait) {
+    .containerOrder{
+        justify-content: flex-start;
+        padding: 2rem;
+        padding-top: 4rem;
+        height: 75vh;
+    }
+    .titleOrder{
+        font-size: 1.5rem;
+    }
+    .textOrder{
+        font-size: 1rem;
+    }
+}

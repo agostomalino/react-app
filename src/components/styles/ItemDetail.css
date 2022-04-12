@@ -31,3 +31,23 @@ img{
     padding: 1rem;
     text-align: center;
 }
+
+@media (max-width: 780px) {
+    div .detalleCard{
+        display: flex;
+        flex-direction: column;
+        height: auto;
+        padding: 1rem;
+    }
+    .containerInfo{
+        flex-direction: column;
+    }
+    .itemInfo{
+        margin: 5px;
+        width: 100%;
+    }
+    .itemCount{
+        width: 100%;
+    }
+
+}
