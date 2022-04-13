@@ -2,6 +2,7 @@ import {useContext} from "react";
 import CartWidget from "./CartWidget";
 import { NavLink } from "react-router-dom";
 import { CartContexto } from '../../context/CartContext';
+import '../styles/NavBar.css'
 
 function NavBar({ textoDeLogo }) {
 
@@ -10,7 +11,7 @@ function NavBar({ textoDeLogo }) {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container-fluid">
-        <NavLink className="navbar-brand" to={"/"}>
+        <NavLink className="navbar-brand" id='navTitle' to={"/"}>
           {textoDeLogo}
         </NavLink>
         <button

@@ -10,6 +10,9 @@ div .detalleCard {
 }
 .containerInfo{
     display: flex;
+    align-items: center;
+    justify-items: center;
+    margin: 1rem;
 }
 .itemInfo{
     margin-left: 2rem;
@@ -23,7 +26,7 @@ img{
     width: auto;
 }
 .btnTerminar{
-    height: auto;
+    height: 40px;
 }
 .cargandoTitle{
     margin:auto;
