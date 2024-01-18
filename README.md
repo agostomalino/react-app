@@ -2,10 +2,10 @@
 
 ---
 
-Es un ecommerce de dibujos y prints
+Ecommerce de dibujos y prints
 
 
-Frameworks utilizados
+***Frameworks utilizados
 - React
 - Bootstrap
 
